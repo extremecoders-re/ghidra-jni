@@ -32,6 +32,8 @@ Under source files to parse, add `jni-ghidra.h` to the list. Remove any other ex
 
 The default `jni.h` from Java fails to parse correctly in Ghidra. As a result, I have taken a precompiled `jni.h` intended for IDA Pro from [here](https://gist.github.com/Jinmo/048776db75067dcd6c57f1154e65b868) and pre-processed it (`gcc -E`/`cpp`). The pre-processed file contain several lines begining with `#` which correspond to source files. These lines must be removed or else Ghidra will fail to parse.
 
+As a result of pre-processing this does not contain C++ definitions for the various JNI types. If you want C++ type definitions as well use the one intended for IDA Pro.
+
 ## Useful Info: Adding a function data type using the API
 
 A function data type can also be added using the Ghidra Python API. An example is shown below
