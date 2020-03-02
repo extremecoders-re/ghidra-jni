@@ -54,7 +54,7 @@ dtm.addDataType(fn_defn, DataTypeConflictHandler.DEFAULT_HANDLER)
 
 From my answer on [RE.SE](https://reverseengineering.stackexchange.com/a/23373/1413)
 
-```
+```python
 from ghidra.program.model.data import DataTypeConflictHandler
 from ghidra.app.util.cparser.C import CParser
 
