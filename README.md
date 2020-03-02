@@ -34,7 +34,9 @@ The default `jni.h` from Java fails to parse correctly in Ghidra. As a result, I
 
 As a result of pre-processing this does not contain C++ definitions for the various JNI types. If you want C++ type definitions as well use the one intended for IDA Pro.
 
-## Useful Info: Adding a function data type using the API
+## Useful Info 
+
+### Adding a function data type using the API
 
 A function data type can also be added using the Ghidra Python API. An example is shown below
 
@@ -46,4 +48,31 @@ fn_sign = 'void function1(int p1, int p2)'
 fn_defn = parseSignature(None, currentProgram, fn_sign)
 dtm = currentProgram.getDataTypeManager()
 dtm.addDataType(fn_defn, DataTypeConflictHandler.DEFAULT_HANDLER)
+```
+
+### Creating structures programmatically
+
+From my answer on [RE.SE](https://reverseengineering.stackexchange.com/a/23373/1413)
+
+```
+from ghidra.program.model.data import DataTypeConflictHandler
+from ghidra.app.util.cparser.C import CParser
+
+mystruct_txt = """
+struct mystruct{
+    uint32_t field1; 
+    uint32_t field2;
+};"""
+
+# Get Data Type Manager
+data_type_manager = currentProgram.getDataTypeManager()
+
+# Create CParser
+parser = CParser(data_type_manager)
+
+# Parse structure
+parsed_datatype = parser.parse(mystruct_txt)
+
+# Add parsed type to data type manager
+data_type_manager.addDataType(parsed_datatype, DataTypeConflictHandler.DEFAULT_HANDLER)
 ```
